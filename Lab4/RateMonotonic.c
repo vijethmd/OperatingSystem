@@ -2,9 +2,9 @@
 
 typedef struct {
     int pid;
-    int period;     // Task period (also serves as deadline)
-    int burst;      // Execution time
-    int remaining;  // Remaining execution time
+    int period;     
+    int burst;      
+    int remaining;  
 } Task;
 
 void sortByPeriod(Task tasks[], int n) {
@@ -29,14 +29,14 @@ void rateMonotonic(Task tasks[], int n, int sim_time) {
     for (int time = 0; time < sim_time; time++) {
         int scheduled = -1;
 
-        // Check for tasks that need to execute at this time
+        
         for (int i = 0; i < n; i++) {
             if (time % tasks[i].period == 0) {
                 tasks[i].remaining = tasks[i].burst;
             }
         }
 
-        // Find highest priority task with remaining work
+      
         for (int i = 0; i < n; i++) {
             if (tasks[i].remaining > 0) {
                 scheduled = i;
@@ -44,7 +44,7 @@ void rateMonotonic(Task tasks[], int n, int sim_time) {
             }
         }
 
-        // Execute the task
+        
         if (scheduled != -1) {
             tasks[scheduled].remaining--;
             printf("%d\tT%d\n", time, tasks[scheduled].pid);
